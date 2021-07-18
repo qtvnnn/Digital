@@ -14,6 +14,8 @@ import dao.impl.DigitalDAOImpl;
 import entity.News;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,7 +53,8 @@ public class HomeController extends HttpServlet {
             List<News> top6News = digitalDAO.getTop(6);
             request.setAttribute("top6", top6News);
             request.getRequestDispatcher("HomePage.jsp").forward(request, response);
-        } catch (Exception e) {
+        } catch (Exception e) {            
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("Error.jsp").forward(request, response);
         }
